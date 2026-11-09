@@ -33,9 +33,7 @@ export default function Welcome() {
           <RoleLink href="/login/student" label="Student Login" icon={<User className="h-12 w-12 text-white" fill="white" />} />
           <RoleLink href="/login/admin" label="Admin Login" icon={<Headset className="h-12 w-12 text-white" />} />
         </div>
-        <p className="mt-12 text-sm font-semibold text-slate-600">
-          Don&apos;t have an account? <span className="text-[#0A6CFF]">Ask your Administrator</span>
-        </p>
+        <p className="mt-12 text-sm font-semibold text-slate-600">Need an account? Ask your administrator.</p>
       </section>
     </Shell>
   );
