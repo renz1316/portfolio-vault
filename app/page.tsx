@@ -1,58 +1,42 @@
-import { DeployButton } from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { AuthButton } from "@/components/auth-button";
-import { Hero } from "@/components/hero";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Headset, User } from "lucide-react";
+import type { ReactNode } from "react";
+import { Shell } from "@/components/pv-shell";
 
-export default function Home() {
+function RoleLink({ href, label, icon }: { href: string; label: string; icon: ReactNode }) {
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
-              </div>
-            </div>
-            {!hasEnvVars ? (
-              <EnvVarWarning />
-            ) : (
-              <Suspense>
-                <AuthButton />
-              </Suspense>
-            )}
-          </div>
-        </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-          <Hero />
-          <main className="flex-1 flex flex-col gap-6 px-4">
-            <h2 className="font-medium text-xl mb-4">Next steps</h2>
-            {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          </main>
-        </div>
+    <Link href={href} className="flex flex-col items-center gap-3 text-base font-semibold">
+      <span className="flex h-[88px] w-[88px] items-center justify-center rounded-full bg-[#3B7BE0]">
+        {icon}
+      </span>
+      {label}
+    </Link>
+  );
+}
 
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>
-            Powered by{" "}
-            <a
-              href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-              target="_blank"
-              className="font-bold hover:underline"
-              rel="noreferrer"
-            >
-              Supabase
-            </a>
-          </p>
-          <ThemeSwitcher />
-        </footer>
-      </div>
-    </main>
+export default function Welcome() {
+  return (
+    <Shell>
+      <header
+        className="flex items-center gap-3 bg-[#0A6CFF] px-5 pb-8 pt-12"
+        style={{ borderBottomLeftRadius: "50% 28px", borderBottomRightRadius: "50% 28px" }}
+      >
+        {/* Replace this circle with your BulSU logo image later */}
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-orange-400 bg-white text-xs font-bold text-[#0A6CFF]">
+          BulSU
+        </div>
+        <h1 className="text-xl font-bold text-white">Bulacan State University</h1>
+      </header>
+      <section className="flex flex-1 flex-col items-center px-6 pb-12 pt-20">
+        <h2 className="text-xl font-semibold text-slate-600">Login to your account</h2>
+        <div className="mt-10 flex gap-10">
+          <RoleLink href="/login/student" label="Student Login" icon={<User className="h-12 w-12 text-white" fill="white" />} />
+          <RoleLink href="/login/admin" label="Admin Login" icon={<Headset className="h-12 w-12 text-white" />} />
+        </div>
+        <p className="mt-12 text-sm font-semibold text-slate-600">
+          Don&apos;t have an account? <span className="text-[#0A6CFF]">Ask your Administrator</span>
+        </p>
+      </section>
+    </Shell>
   );
 }
